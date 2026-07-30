@@ -218,7 +218,10 @@ h4 { font-size: 1.05rem; font-weight: 600; }
 .modal-overlay.active { opacity: 1; pointer-events: all; }
 .modal {
   background: white; border-radius: var(--radius-xl); max-width: 920px; width: 100%;
-  max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); position: relative;
+  max-height: 90vh; overflow-y: auto; overflow-x: hidden;
+  box-shadow: var(--shadow-lg); position: relative;
+  -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
+  overscroll-behavior: contain;
 }
 .modal-close {
   position: sticky; top: 0.75rem; float: right; margin: 0.75rem 0.75rem 0 0;
