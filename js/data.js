@@ -1,8 +1,8 @@
-﻿/**
+/**
  * SilicOne - Product Data (18 supplier images + 2 AI images)
  * 20 B2B SKUs with real supplier product photos
  */
-const products = [
+var products = [
   // --- Category: Nose Pads (4) ---
   { id:"NP-001",category:"nose",name:"Adhesive Silicone Heightening Nose Pads",nameCN:"自粘式硅胶增高鼻托",image:"images/products/NP-001.jpg",specs:{material:"Food-grade silicone (FDA)",size:"11×7mm, 3 heights (1.5/2.5/3.5mm)",color:"Transparent, Black, Beige",packaging:"OPP bag + card, 10/20/50 pairs per pack"},pricing:[{qty:"100-500",price:"$0.12/pair"},{qty:"500-2000",price:"$0.08/pair"},{qty:"2000-10000",price:"$0.05/pair"},{qty:"10000+",price:"$0.03/pair"}],moq:100,leadtime:"3-7 days (stock) / 10-15 days (custom)",certifications:"FDA, REACH, LFGB",customOptions:"Color, hardness, logo printing, retail packaging",targetBuyers:"Optical chains, Amazon sellers, eyewear brands",description:"Premium adhesive silicone nose pads for Asian fit. Self-adhesive, 3 thicknesses.",tags:["bestseller","high-margin"]},
   { id:"NP-002",category:"nose",name:"Screw-Type Silicone Nose Pads (Oval)",nameCN:"螺丝固定式硅胶鼻托（椭圆型）",image:"images/products/NP-002.jpg",specs:{material:"Silicone with stainless steel core",size:"13×7mm oval, 10×6mm teardrop",color:"Clear, Black, Brown"},pricing:[{qty:"100-500",price:"$0.15/pair"},{qty:"500-2000",price:"$0.10/pair"},{qty:"2000+",price:"$0.07/pair"}],moq:100,leadtime:"3-7 days",certifications:"FDA, RoHS",customOptions:"Size, shape, hardness, screw type",targetBuyers:"Optical repair shops, frame manufacturers",description:"Professional screw-mounted nose pads with metal core. Compatible with metal and acetate frames.",tags:[]},
@@ -36,19 +36,19 @@ const products = [
   { id:"KT-004",category:"kit",name:"Smart Glasses Accessory Starter Pack",nameCN:"智能眼镜配件入门包",image:"images/products/KT-004.jpg",specs:{contents:"10pr smart glasses nose pads mixed + 5pr ear hooks",packaging:"Retail-ready blister card",material:"Premium silicone"},pricing:[{qty:"100-500",price:"$1.00/set"},{qty:"500-2000",price:"$0.70/set"},{qty:"2000+",price:"$0.50/set"}],moq:100,leadtime:"7-12 days",certifications:"FDA",customOptions:"Brand-specific packaging, model mix",targetBuyers:"Smart glasses brands, tech accessory sellers",description:"Curated mix pack for smart glasses users. Includes most popular sizes for Meta, XREAL, Huawei.",tags:["trending","high-margin"]}
 ];
 
-const categories = [
+var categories = [
   { id:"all",icon:"⊞" },{ id:"nose",icon:"◉" },{ id:"ear",icon:"↻" },
   { id:"temple",icon:"▬" },{ id:"strap",icon:"～" },
   { id:"smart",icon:"◆" },{ id:"kit",icon:"⊡" }
 ];
 
-const caseStudies = [
+var caseStudies = [
   { id:"CS-001",titleKey:"case1_title",descKey:"case1_desc",industry:"Optical Retail Chain",location:"United States",orderSize:"50,000 pairs/month",results:"35% cost reduction, 98% quality acceptance"},
   { id:"CS-002",titleKey:"case2_title",descKey:"case2_desc",industry:"DTC Eyewear Brand",location:"Germany",orderSize:"30,000 units initial, 15,000/month",results:"60% margin, 4.8★ customer rating"},
   { id:"CS-003",titleKey:"case3_title",descKey:"case3_desc",industry:"Smart Glasses Accessories",location:"United States / Global",orderSize:"20,000+ units/month, 5 SKUs",results:"10-day time-to-market, #1 Amazon BSR"}
 ];
 
-const suppliers = [
+var suppliers = [
   { name:"Xiamen Xinhuabao Silicone",years:21,location:"Xiamen, Fujian",moq:"500/1000 (custom)",sampleDays:"5-7 days",deliveryDays:"10-15 days",certs:"ISO 9001",rating:5 },
   { name:"Quanzhou Shengda Rubber",years:12,location:"Quanzhou, Fujian",moq:"100/500 (custom)",sampleDays:"3-5 days",deliveryDays:"7-12 days",certs:"ISO 9001",rating:4 },
   { name:"Dongguan Yongcheng New Material",years:10,location:"Dongguan, Guangdong",moq:"200/1000 (custom)",sampleDays:"7-10 days",deliveryDays:"10-15 days",certs:"FDA, LFGB, REACH",rating:5 }
