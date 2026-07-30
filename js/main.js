@@ -118,11 +118,11 @@
       const priceMin = p.pricing[0]?.price || 'N/A';
       const catName = getCategoryName(p.category);
       const tagHtml = p.tags.map(tg => `<span class="prod-tag ${tg}">${tg.replace('-',' ')}</span>`).join('');
+      const displayImg = p.image.startsWith('http') ? p.image : (p.image.startsWith('images/') ? p.image : 'https://sc02.alicdn.com/kf/Ad42770af4fda44178ce7fe0a0797c9c2R.png');
       
       return `
         <div class="product-card" onclick="window._openProductDetail('${p.id}')" role="button" tabindex="0">
-          <div class="prod-img">
-            <span>🕶️</span>
+          <div class="prod-img" style="background: url('${displayImg}') center/contain no-repeat; background-color: var(--gray-50);">
             ${tagHtml ? `<div class="prod-tags">${tagHtml}</div>` : ''}
           </div>
           <div class="prod-body">
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="prod-footer">
-            <span style="font-size:0.82rem;color:var(--text-light)">⏱ ${p.leadtime}</span>
+            <span style="font-size:0.82rem;color:var(--text-light)">鈴?${p.leadtime}</span>
             <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();window._openProductDetail('${p.id}')">${t('prod_inquiry_btn')}</button>
           </div>
         </div>
@@ -203,9 +203,10 @@
       return `<div class="spec-row"><span class="spec-label">${label}</span><span class="spec-value">${v}</span></div>`;
     }).join('');
     
+    const displayImg = p.image.startsWith('http') ? p.image : 'https://sc02.alicdn.com/kf/Ad42770af4fda44178ce7fe0a0797c9c2R.png';
     body.innerHTML = `
       <div class="modal-grid">
-        <div class="modal-img">🕶️<br><span style="font-size:0.85rem;color:var(--gray-400)">${p.id}</span></div>
+        <div class="modal-img" style="background: url('${displayImg}') center/contain no-repeat; background-color: var(--gray-50);"></div>
         <div class="modal-info">
           <h2>${p.name}</h2>
           <div class="modal-sku">SKU: ${p.id} ${tagHtml ? ' | ' + tagHtml : ''}</div>
@@ -275,13 +276,13 @@
     if (!grid) return;
     grid.innerHTML = caseStudies.map(cs => `
       <div class="case-card">
-        <div class="case-icon">${cs.industry.includes('Smart') ? '🤖' : cs.industry.includes('DTC') ? '👓' : '🏪'}</div>
+        <div class="case-icon">${cs.industry.includes('Smart') ? '馃' : cs.industry.includes('DTC') ? '馃憮' : '馃彧'}</div>
         <h3>${t(cs.titleKey)}</h3>
         <p>${t(cs.descKey)}</p>
         <div class="case-meta">
-          <span>📍 ${cs.location}</span>
-          <span>📦 ${cs.orderSize}</span>
-          <span>📊 ${cs.results}</span>
+          <span>馃搷 ${cs.location}</span>
+          <span>馃摝 ${cs.orderSize}</span>
+          <span>馃搳 ${cs.results}</span>
         </div>
       </div>
     `).join('');
@@ -322,7 +323,7 @@
         <td>${s.sampleDays}</td>
         <td>${s.deliveryDays}</td>
         <td>${s.certs}</td>
-        <td class="rating">${'★'.repeat(s.rating)}${'☆'.repeat(5-s.rating)}</td>
+        <td class="rating">${'鈽?.repeat(s.rating)}${'鈽?.repeat(5-s.rating)}</td>
       </tr>
     `).join('');
   }
