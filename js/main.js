@@ -203,13 +203,13 @@
       return `<div class="spec-row"><span class="spec-label">${label}</span><span class="spec-value">${v}</span></div>`;
     }).join('');
     
-    const displayImg = p.image.startsWith('http') ? p.image : 'https://sc02.alicdn.com/kf/Ad42770af4fda44178ce7fe0a0797c9c2R.png';
+    const displayImg = p.image.startsWith('http') ? p.image : p.image;
     body.innerHTML = `
       <div class="modal-grid">
-        <div class="modal-img" style="background: url('${displayImg}') center/contain no-repeat; background-color: var(--gray-50);"></div>
+        <div class="modal-img"><img src="${displayImg}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0'"></div>
         <div class="modal-info">
           <h2>${p.name}</h2>
-          <div class="modal-sku">SKU: ${p.id} ${tagHtml ? ' | ' + tagHtml : ''}</div>
+          <div class="modal-sku">SKU: ${p.id}${tagHtml ? ' | ' + tagHtml : ''}</div>
           <p style="color:var(--text-light);font-size:0.9rem;margin-bottom:1rem;">${p.description}</p>
           
           <h4>${t('pdetail_specs')}</h4>
