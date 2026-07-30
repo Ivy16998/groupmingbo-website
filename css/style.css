@@ -107,8 +107,8 @@ h4 { font-size: 1.05rem; font-weight: 600; }
 
 /* --- Hero --- */
 .hero {
-  margin-top: var(--header-height); padding: 5rem 0 4rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 60%, #0a1628 100%);
+  margin-top: var(--header-height); padding: 7rem 0 6rem;
+  background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(15, 36, 64, 0.9)), url('https://sc02.alicdn.com/kf/Ade9ddc983c0f4c18937b3ee25a0e11bfu.png') center/cover no-repeat;
   color: white; text-align: center;
 }
 .hero-content { max-width: 750px; margin: 0 auto; }
@@ -180,7 +180,7 @@ h4 { font-size: 1.05rem; font-weight: 600; }
   font-size: 0.9rem; width: 220px; outline: none; transition: var(--transition);
 }
 .product-search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(49,130,206,0.1); }
-.product-search::before { content: "🔍"; position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); font-size: 0.85rem; pointer-events: none; }
+.product-search::before { content: "馃攳"; position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); font-size: 0.85rem; pointer-events: none; }
 
 .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .product-card {
