@@ -225,7 +225,7 @@
             <strong>${t('pdetail_custom_opts')}:</strong> ${p.customOptions}
           </div>
           
-          <button class="btn btn-primary btn-lg" style="margin-top:1.5rem;width:100%;justify-content:center;" onclick="document.getElementById('product-modal').classList.remove('active');document.getElementById('inquiry-product').value='${p.id} - ${p.name.replace(/'/g,"\\'")}';document.getElementById('inquiry-section').scrollIntoView({behavior:'smooth'});">${t('pdetail_request')}</button>
+          <button class="btn btn-primary btn-lg" style="margin-top:1.5rem;width:100%;justify-content:center;" onclick="window._inquireProduct('${p.id}','${p.name.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">${t('pdetail_request')}</button>
         </div>
       </div>
     `;
@@ -235,37 +235,91 @@
   };
 
   function closeModal() {
-    const modal = document.getElementById('product-modal');
+    var modal = document.getElementById('product-modal');
     if (modal) { modal.classList.remove('active'); document.body.style.overflow = ''; }
   }
 
+  // Close modal then scroll to inquiry form and pre-fill product
+  window._inquireProduct = function(productId, productName) {
+    closeModal();
+    setTimeout(function() {
+      var sel = document.getElementById('inquiry-product');
+      if (sel) {
+        // Try to select matching option, else set first option value
+        var matched = false;
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value.indexOf(productId) !== -1) {
+            sel.selectedIndex = i;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) sel.value = productId + ' - ' + productName;
+      }
+      var section = document.getElementById('contact');
+      if (section) {
+        var top = section.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }, 320);
+  };
+
   // ==================== Inquiry Form ====================
+  var SALES_EMAIL = 'sales@groupmingbo.com';
+
   function initInquiryForm() {
-    const forms = document.querySelectorAll('.inquiry-form form');
-    forms.forEach(form => {
+    var forms = document.querySelectorAll('.inquiry-form form');
+    forms.forEach(function(form) {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        const formData = new FormData(this);
-        const data = {};
-        formData.forEach((v, k) => data[k] = v);
-        
-        // Save to localStorage as mock CRM
-        const inquiries = JSON.parse(localStorage.getItem('silicon_inquiries') || '[]');
-        inquiries.push({ ...data, timestamp: new Date().toISOString(), id: 'INQ-' + Date.now() });
+        var formData = new FormData(this);
+        var data = {};
+        formData.forEach(function(v, k) { data[k] = v; });
+        var inquiryId = 'INQ-' + Date.now();
+        data.id = inquiryId;
+        data.timestamp = new Date().toISOString();
+
+        // 1. Save to localStorage (admin dashboard can read this)
+        var inquiries = JSON.parse(localStorage.getItem('silicon_inquiries') || '[]');
+        inquiries.push(data);
         localStorage.setItem('silicon_inquiries', JSON.stringify(inquiries));
-        
-        // Show success
-        const successEl = this.parentElement.querySelector('.form-success');
+
+        // 2. Build email body and open mailto (delivers directly to sales@groupmingbo.com)
+        var subject = encodeURIComponent('[SilicOne Inquiry] ' + (data.company || data.name || 'New Inquiry'));
+        var body = encodeURIComponent(
+          'New inquiry from ' + (data.name || '') + '\n' +
+          '-------------------------------------------\n' +
+          'Name:           ' + (data.name || '') + '\n' +
+          'Company:        ' + (data.company || '') + '\n' +
+          'Email:          ' + (data.email || '') + '\n' +
+          'Phone/WhatsApp: ' + (data.phone || '') + '\n' +
+          'Product:        ' + (data.product || '') + '\n' +
+          'Quantity:       ' + (data.quantity || '') + '\n' +
+          'Target Market:  ' + (data.target_market || '') + '\n' +
+          'Custom Needs:   ' + (data.custom_needs || '') + '\n' +
+          '-------------------------------------------\n' +
+          'Inquiry ID: ' + inquiryId + '\n' +
+          'Time: ' + new Date().toLocaleString()
+        );
+        // Open email client with prefilled content
+        var mailtoLink = 'mailto:' + SALES_EMAIL + '?subject=' + subject + '&body=' + body;
+        window.open(mailtoLink, '_blank');
+
+        // 3. Show success message
+        var successEl = this.parentElement.querySelector('.form-success');
         if (successEl) {
           this.style.display = 'none';
           successEl.classList.add('show');
-          setTimeout(() => { this.style.display = ''; successEl.classList.remove('show'); this.reset(); }, 5000);
+          var msgEl = successEl.querySelector('p[data-i18n]');
+          if (msgEl) msgEl.textContent = 'Your inquiry has been recorded. Your email client should open automatically to send it to ' + SALES_EMAIL + '. Please click Send in your email app.';
+          var self = this;
+          setTimeout(function() {
+            self.style.display = '';
+            successEl.classList.remove('show');
+            if (msgEl) msgEl.setAttribute('data-i18n','inq_success');
+            self.reset();
+          }, 8000);
         }
-        
-        // Trigger mock email notification
-        console.log('[CRM] New inquiry saved:', data.id || 'INQ-' + Date.now());
-        console.log('[Email] Auto-reply triggered to:', data.email);
-        console.log('[CRM] Total inquiries:', inquiries.length);
       });
     });
   }
