@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SilicOne - Product Data (18 supplier images + 2 AI images)
  * 20 B2B SKUs with real supplier product photos
  */
