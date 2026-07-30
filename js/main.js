@@ -134,7 +134,7 @@
             </div>
           </div>
           <div class="prod-footer">
-            <span style="font-size:0.82rem;color:var(--text-light)">鈴?${p.leadtime}</span>
+            <span style="font-size:0.82rem;color:var(--text-light)">⏱ ${p.leadtime}</span>
             <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();window._openProductDetail('${p.id}')">${t('prod_inquiry_btn')}</button>
           </div>
         </div>
@@ -276,13 +276,13 @@
     if (!grid) return;
     grid.innerHTML = caseStudies.map(cs => `
       <div class="case-card">
-        <div class="case-icon">${cs.industry.includes('Smart') ? '馃' : cs.industry.includes('DTC') ? '馃憮' : '馃彧'}</div>
+        <div class="case-icon">${cs.industry.includes('Smart') ? '🤖' : cs.industry.includes('DTC') ? '👓' : '🏪'}</div>
         <h3>${t(cs.titleKey)}</h3>
         <p>${t(cs.descKey)}</p>
         <div class="case-meta">
-          <span>馃搷 ${cs.location}</span>
-          <span>馃摝 ${cs.orderSize}</span>
-          <span>馃搳 ${cs.results}</span>
+          <span>📍 ${cs.location}</span>
+          <span>📦 ${cs.orderSize}</span>
+          <span>📊 ${cs.results}</span>
         </div>
       </div>
     `).join('');
@@ -323,7 +323,7 @@
         <td>${s.sampleDays}</td>
         <td>${s.deliveryDays}</td>
         <td>${s.certs}</td>
-        <td class="rating">${'鈽?.repeat(s.rating)}${'鈽?.repeat(5-s.rating)}</td>
+        <td class="rating">${'★'.repeat(s.rating)}${'☆'.repeat(5-s.rating)}</td>
       </tr>
     `).join('');
   }
