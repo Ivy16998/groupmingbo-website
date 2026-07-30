@@ -2,7 +2,7 @@
  * SilicOne Eyewear Accessories - Multi-language Translations
  * Languages: English (EN), Spanish (ES), French (FR)
  */
-const i18n = {
+var i18n = {
   en: {
     // Navigation
     nav_home: "Home",
