@@ -118,7 +118,8 @@
       const priceMin = p.pricing[0]?.price || 'N/A';
       const catName = getCategoryName(p.category);
       const tagHtml = p.tags.map(tg => `<span class="prod-tag ${tg}">${tg.replace('-',' ')}</span>`).join('');
-      const displayImg = p.image.startsWith('http') ? p.image : (p.image.startsWith('images/') ? p.image : 'https://sc02.alicdn.com/kf/Ad42770af4fda44178ce7fe0a0797c9c2R.png');
+      var imgPath = p.image || ('images/products/' + p.id + '.jpg');
+      var displayImg = imgPath + (imgPath.indexOf('?') === -1 ? '?v=20260927b' : '');
       
       return `
         <div class="product-card" onclick="window._openProductDetail('${p.id}')" role="button" tabindex="0">
@@ -203,7 +204,8 @@
       return `<div class="spec-row"><span class="spec-label">${label}</span><span class="spec-value">${v}</span></div>`;
     }).join('');
     
-    const displayImg = p.image.startsWith('http') ? p.image : p.image;
+    var modalImgPath = p.image || ('images/products/' + p.id + '.jpg');
+    var displayImg = modalImgPath + (modalImgPath.indexOf('?') === -1 ? '?v=20260927b' : '');
     body.innerHTML = `
       <div class="modal-grid">
         <div class="modal-img"><img src="${displayImg}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0'"></div>
