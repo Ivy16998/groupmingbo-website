@@ -205,10 +205,23 @@
     }).join('');
     
     var modalImgPath = p.image || ('images/products/' + p.id + '.jpg');
-    var displayImg = modalImgPath + (modalImgPath.indexOf('?') === -1 ? '?v=20260927b' : '');
+    var displayImg = modalImgPath + (modalImgPath.indexOf('?') === -1 ? '?v=20260928' : '');
+    var sizeImgHtml = '';
+    if (p.sizeImage) {
+      var sizeImgSrc = p.sizeImage + (p.sizeImage.indexOf('?') === -1 ? '?v=20260928' : '');
+      sizeImgHtml = `
+        <div style="display:flex;gap:0.5rem;margin-top:0.75rem;justify-content:center;">
+          <button type="button" class="btn btn-sm btn-outline" style="padding:0.25rem 0.65rem;font-size:0.8rem;" onclick="document.getElementById('modal-main-img').src='${displayImg}'">📷 Product View</button>
+          <button type="button" class="btn btn-sm btn-outline" style="padding:0.25rem 0.65rem;font-size:0.8rem;" onclick="document.getElementById('modal-main-img').src='${sizeImgSrc}'">📐 Dimension Chart</button>
+        </div>
+      `;
+    }
     body.innerHTML = `
       <div class="modal-grid">
-        <div class="modal-img"><img src="${displayImg}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0'"></div>
+        <div>
+          <div class="modal-img"><img id="modal-main-img" src="${displayImg}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0'"></div>
+          ${sizeImgHtml}
+        </div>
         <div class="modal-info">
           <h2>${p.name}</h2>
           <div class="modal-sku">SKU: ${p.id}${tagHtml ? ' | ' + tagHtml : ''}</div>
