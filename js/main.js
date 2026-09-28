@@ -119,7 +119,7 @@
       const catName = getCategoryName(p.category);
       const tagHtml = p.tags.map(tg => `<span class="prod-tag ${tg}">${tg.replace('-',' ')}</span>`).join('');
       var imgPath = p.image || ('images/products/' + p.id + '.jpg');
-      var displayImg = imgPath + (imgPath.indexOf('?') === -1 ? '?v=20261029' : '');
+      var displayImg = imgPath + (imgPath.indexOf('?') === -1 ? '?v=20261030' : '');
       
       return `
         <div class="product-card" onclick="window._openProductDetail('${p.id}')" role="button" tabindex="0">
@@ -205,10 +205,10 @@
     }).join('');
     
     var modalImgPath = p.image || ('images/products/' + p.id + '.jpg');
-    var displayImg = modalImgPath + (modalImgPath.indexOf('?') === -1 ? '?v=20261029' : '');
+    var displayImg = modalImgPath + (modalImgPath.indexOf('?') === -1 ? '?v=20261030' : '');
     var sizeImgHtml = '';
     if (p.sizeImage) {
-      var sizeImgSrc = p.sizeImage + (p.sizeImage.indexOf('?') === -1 ? '?v=20261029' : '');
+      var sizeImgSrc = p.sizeImage + (p.sizeImage.indexOf('?') === -1 ? '?v=20261030' : '');
       var btnLabel = p.sizeLabel || '📐 Dimension Chart';
       sizeImgHtml = `
         <div style="display:flex;gap:0.5rem;margin-top:0.75rem;justify-content:center;">
